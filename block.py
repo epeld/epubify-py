@@ -4,14 +4,14 @@ import xml.etree.ElementTree as ET
 def detect_paragraphs(block):
     prev_x = None
     p = ET.Element('p', {'first': "true"})
-    ps = []
+    ps = [p]
     for l in block:
         bbox = l.attrib['bbox'].split()
         x = float(bbox[0])
         x2 = float(bbox[2])
         if prev_x and prev_x < x:
-            ps.append(p)
             p = ET.Element('p')
+            ps.append(p)
         prev_x = x
         for f in l:
             p.append(f)
