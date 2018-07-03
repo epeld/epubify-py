@@ -1,9 +1,12 @@
 import subprocess
 import tempfile
-from xml.dom import minidom
+import xml.etree.ElementTree as ET
+
 
 def main():
-    parse("/home/erik/Downloads/halmos.pdf")
+    document = parse("/home/erik/Downloads/halmos.pdf")
+    for page in document:
+        print(page.tag, page.attrib)
 
 
 def parse(filename):
@@ -11,8 +14,8 @@ def parse(filename):
     with tempfile.TemporaryFile() as tmp:
         subprocess.call(args, stdout=tmp)
         tmp.seek(0, 0)
-        xmldoc = minidom.parse(tmp)
-        print(xmldoc)
+        tree = ET.parse(tmp)
+        return tree.getroot()
 
 
 if __name__ == "__main__":
