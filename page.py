@@ -41,7 +41,13 @@ def identify_font(name, size):
     else:
         return name + "-" + str(size)
         
+
+def remove_first_block(page):
+    # "First block is typically a header with pagenr"
+    page.remove(page[0])
+
 def transform(page):
     concatenate_chars(page)
     transform_blocks(page)
     identify_fonts(page)
+    remove_first_block(page)
