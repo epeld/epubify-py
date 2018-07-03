@@ -2,10 +2,14 @@ import subprocess
 import tempfile
 import xml.etree.ElementTree as ET
 
+import page as pagem
+
 
 def main():
     document = parse("/home/erik/Downloads/halmos.pdf")
-    overview(document)
+    for page in document:
+        pagem.transform(page)
+    ET.dump(document)
 
 
 def overview(document):
