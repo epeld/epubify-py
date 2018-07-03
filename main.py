@@ -2,25 +2,15 @@ import subprocess
 import tempfile
 import xml.etree.ElementTree as ET
 
-import page as pagem
+import document as doc
 
 
 def main():
-    document = parse("/home/erik/Downloads/halmos.pdf")
-    for page in document:
-        pagem.transform(page)
+    filename = "/home/erik/Downloads/halmos.pdf"
+    document = parse(filename)
+    doc.transform(document)
     ET.dump(document)
 
-
-def overview(document):
-    for page in document:
-        print(page.tag, page.attrib)
-        for block in page:
-            print("  ", block.tag, block.attrib)
-            for line in block:
-                print("    ", line.tag, line.attrib)
-                for font in line:
-                    print("      ", font.tag, font.attrib, "".join([c.attrib['c'] for c in font]))
 
 def parse(filename):
     args = ["mutool", "draw", "-X", "-Fstext", filename]
