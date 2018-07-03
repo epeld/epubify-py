@@ -5,6 +5,10 @@ import xml.etree.ElementTree as ET
 
 def main():
     document = parse("/home/erik/Downloads/halmos.pdf")
+    overview(document)
+
+
+def overview(document):
     for page in document:
         print(page.tag, page.attrib)
         for block in page:
@@ -13,7 +17,6 @@ def main():
                 print("    ", line.tag, line.attrib)
                 for font in line:
                     print("      ", font.tag, font.attrib, "".join([c.attrib['c'] for c in font]))
-
 
 def parse(filename):
     args = ["mutool", "draw", "-X", "-Fstext", filename]
