@@ -1,4 +1,5 @@
 import block as blockm
+import xml.etree.ElementTree as ET
 
 # Page transformations
 
@@ -44,9 +45,16 @@ def identify_font(name, size):
         return name + "-" + str(size)
         
 
-def remove_first_block(page):
+def remove_header(page):
     # "First block is typically a header with pagenr"
-    page.remove(page[0])
+    if not page:
+        return
+    el = page[0]
+    dump = str(ET.tostring(el))
+    if "HOW TO WRITE MATHEMATICS" in dump:
+        page.remove(el)
+    elif "PAUL R. HALMOS" in dump:
+        page.remove(el)
 
 
 def unwind_blocks(page):
@@ -61,5 +69,5 @@ def transform(page):
     concatenate_chars(page)
     transform_blocks(page)
     identify_fonts(page)
-    remove_first_block(page)
+    remove_header(page)
     unwind_blocks(page)
