@@ -8,8 +8,8 @@ import document as doc
 def main():
     filename = "/home/erik/Downloads/halmos.pdf"
     document = parse(filename)
-    doc.transform(document)
-    ET.dump(document)
+    document2 = doc.transform(document)
+    ET.dump(document2)
 
 
 def parse(filename):

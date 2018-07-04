@@ -5,8 +5,16 @@ import page as pagem
 def transform(document):
     for page in document:
         pagem.transform(page)
-    # reduce(join_page, list(document), document)
+
+    for page in document:
+        document.remove(page)
+        for c in page:
+            document.append(c)
+
+    return document
 
 
 def join_page(document, page):
-    pass
+    ps = page.findall('p')
+    for p in ps:
+        document.append(p)
