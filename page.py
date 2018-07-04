@@ -46,8 +46,18 @@ def remove_first_block(page):
     # "First block is typically a header with pagenr"
     page.remove(page[0])
 
+
+def unwind_blocks(page):
+    blocks = page.findall('block')
+    for b in blocks:
+        page.remove(b)
+        b.attrib['unwound'] = "true"
+        for c in b:
+            page.append(c)
+
 def transform(page):
     concatenate_chars(page)
     transform_blocks(page)
     identify_fonts(page)
     remove_first_block(page)
+    unwind_blocks(page)
