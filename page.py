@@ -43,7 +43,7 @@ def identify_font(name, size):
         return 'x-small'
     else:
         return name + "-" + str(size)
-        
+
 
 def remove_header(page):
     # "First block is typically a header with pagenr"
@@ -54,6 +54,17 @@ def remove_header(page):
     if "HOW TO WRITE MATHEMATICS" in dump:
         page.remove(el)
     elif "PAUL R. HALMOS" in dump:
+        page.remove(el)
+
+
+
+def remove_footer(page):
+    if not page:
+        return
+    el = page[-1]
+    font = el.find('.//*/font')
+    dump = str(font.text)
+    if dump.isnumeric():
         page.remove(el)
 
 
@@ -70,4 +81,5 @@ def transform(page):
     transform_blocks(page)
     identify_fonts(page)
     remove_header(page)
+    remove_footer(page)
     unwind_blocks(page)
