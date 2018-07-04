@@ -13,8 +13,18 @@ def detect_paragraphs(block):
             p = ET.Element('p')
             ps.append(p)
         prev_x = x
-        for f in l:
-            p.append(f)
+        if len(l):
+            last = None
+            for f in l.findall('.//font'):
+                last = f
+                p.append(f)
+
+            # Try to remove trailing '-'s
+            if last is not None:
+                # print(last.text)
+                if last.text[-1].strip() == "-":
+                    # print(last.text)
+                    last.text = last.text.strip()[:-1]
     if ps:
         ps[-1].attrib['last'] = "true"
     return ps
