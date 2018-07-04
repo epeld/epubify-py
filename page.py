@@ -3,7 +3,7 @@ import block as blockm
 # Page transformations
 
 def concatenate_chars(page):
-    fonts = page.findall('.//*font')
+    fonts = page.findall('.//font')
     for f in fonts:
         size = f.attrib['size']
         name = f.attrib['name']
