@@ -19,7 +19,13 @@ def transform(document):
 
     head.append(ET.fromstring('<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>'))
 
-    for p in clone.findall('.//*/p'):
+    convert_headings(clone)
+
+    return clone
+
+
+def convert_headings(document):
+    for p in document.findall('.//*/p'):
         fs = p.findall(".//font")
         for f in fs:
             if f.attrib['type'] == 'h2':
@@ -28,8 +34,6 @@ def transform(document):
                 for c in p:
                     c.tag = 'span'
                 break
-
-    return clone
 
 
 def join_page(document, page):
