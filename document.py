@@ -3,8 +3,9 @@ import xml.etree.ElementTree as ET
 import page as pagem
 
 def transform(document):
-    for page in document[2:]:
-        document.remove(page)
+    if False:
+        for page in document[5:]:
+            document.remove(page)
 
     for page in document:
         pagem.transform(page)
