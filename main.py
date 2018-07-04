@@ -9,7 +9,13 @@ def main():
     filename = "/home/erik/Downloads/halmos.pdf"
     document = parse(filename)
     document2 = doc.transform(document)
-    ET.dump(document2)
+    # print("-------------------START---------------")
+    ET.ElementTree(document2).write('index.html',
+                                    'utf-8',
+                                    False,
+                                    None,
+                                    'html')
+    # ET.dump(document2)
 
 
 def parse(filename):
