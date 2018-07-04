@@ -30,6 +30,8 @@ def identify_fonts(page):
 def identify_font(name, size):
     if name == 'CMR10':
         return 'regular'
+    elif name == 'CMCSC10':
+        return 'h2'
     elif name == 'CMTI10':
         return 'italic'
     elif name == 'CMTI8':
