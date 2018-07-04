@@ -12,9 +12,12 @@ def transform(document):
 
     ps = document.findall('.//p')
     clone = ET.Element('html')
+    head = ET.SubElement(clone, 'head')
     body = ET.SubElement(clone, 'body')
     for p in ps:
         body.append(p)
+
+    head.append(ET.fromstring('<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>'))
 
     return clone
 
