@@ -3,18 +3,22 @@ import xml.etree.ElementTree as ET
 import page as pagem
 
 def transform(document):
+    for page in document[2:]:
+        document.remove(page)
+
     for page in document:
         pagem.transform(page)
 
-    for page in document:
-        document.remove(page)
-        for c in page:
-            document.append(c)
+    ps = document.findall('.//p')
+    clone = ET.Element('html')
+    body = ET.SubElement(clone, 'body')
+    for p in ps:
+        body.append(p)
 
-    return document
+    return clone
 
 
 def join_page(document, page):
-    ps = page.findall('p')
+    ps = page.findall('.//p')
     for p in ps:
         document.append(p)
