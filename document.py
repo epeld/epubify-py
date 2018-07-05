@@ -62,8 +62,3 @@ def join_paragraphs(document):
                 p.tag = 'span'
                 continue
         prev = p
-
-    print("Removing..")
-    # for p in document.findall('*[merged="true"]'):
-    #     print(p)
-    #     document.remove(p)
