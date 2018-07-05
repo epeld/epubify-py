@@ -18,6 +18,7 @@ def xml_mode():
     else:
         pages = None
         [filename] = args
+    print("Writing output.xml")
     xmlout('output.xml', filename, pages)
 
 
@@ -36,6 +37,7 @@ def main():
     document = parse(filename, pages)
     document2 = doc.transform(document)
     # print("-------------------START---------------")
+    print("Writing index.html")
     ET.ElementTree(document2).write('index.html',
                                     'utf-8',
                                     False,
