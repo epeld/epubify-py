@@ -1,12 +1,18 @@
+import sys
 import subprocess
 import tempfile
 import xml.etree.ElementTree as ET
 
 import document as doc
 
+def print_usage():
+    print("Usage: epubify [input.pdf]")
 
 def main():
-    filename = "/home/erik/Downloads/halmos.pdf"
+    if len(sys.argv) < 2:
+        print_usage()
+        sys.exit(1)
+    filename = sys.argv[1]
     document = parse(filename)
     document2 = doc.transform(document)
     # print("-------------------START---------------")
