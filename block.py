@@ -63,9 +63,12 @@ def join_fonts(paragraph):
 
 
 def remove_empty_fonts(p):
+    # return
     for f in p:
-        if not f.text.strip():
-            p.tag = 'span'
+        if f.text.strip():
+            return
+    p.tag = 'span'
+    p.attrib['elided'] = 'true'
 
 def transform(block):
     ps = detect_paragraphs(block)
