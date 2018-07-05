@@ -69,10 +69,16 @@ def remove_footer(page):
 
 
 def unwind_blocks(page):
+    if page:
+        first = page[0]
+        if first:
+            first[0].attrib['first'] = 'true'
+        last = page[-1]
+        if last:
+            last[-1].attrib['last'] = 'true'
     blocks = page.findall('block')
     for b in blocks:
         page.remove(b)
-        b.attrib['unwound'] = "true"
         for c in b:
             page.append(c)
 
