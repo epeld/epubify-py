@@ -43,8 +43,13 @@ def join_fonts(paragraph):
     first = paragraph[0]
     first.text = first.text.strip()
     for f in paragraph[1:]:
+        if not f.text.strip():
+            continue
         f.text = f.text.strip()
-        c = first.text[-1]
+        if first.text:
+            c = first.text[-1]
+        else:
+            c = ''
         if c == '-':
             first.text = first.text[:-1]
         else:
@@ -56,9 +61,16 @@ def join_fonts(paragraph):
                 first.text = first.text + " "
         first = f
 
+
+def remove_empty_fonts(p):
+    for f in p:
+        if not f.text.strip():
+            p.tag = 'span'
+
 def transform(block):
     ps = detect_paragraphs(block)
     block.clear()
     for p in ps:
+        remove_empty_fonts(p)
         join_fonts(p)
         block.append(p)
