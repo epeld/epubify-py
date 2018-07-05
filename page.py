@@ -55,6 +55,8 @@ def remove_header(page):
         page.remove(el)
     elif "PAUL R. HALMOS" in dump:
         page.remove(el)
+    elif "Page " in dump:
+        page.remove(el)
 
 
 
